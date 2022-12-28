@@ -16,4 +16,4 @@ Following ENV are required:
 - PORT: application port
 
 # License
-MIT
+MIT License (MIT)
