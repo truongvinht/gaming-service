@@ -26,7 +26,7 @@ async function mongoConnector() {
     const opts = {
       bufferCommands: false,
     }
-
+    mongoose.set('strictQuery', false);
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
       return mongoose
     }).catch(err => {
