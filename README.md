@@ -1,4 +1,4 @@
-![Next.js CI](https://github.com/truongvinht/gaming-service
+![Node.js CI](https://github.com/truongvinht/gaming-service
 Public/workflows/Node.js%20CI/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/truongvinht/gaming-service/badge.svg?branch=main)](https://coveralls.io/github/truongvinht/gaming-service?branch=main)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
