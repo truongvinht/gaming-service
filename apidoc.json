@@ -1,0 +1,9 @@
+{
+  "name": "Gaming RESTful API",
+  "version": "1.0.0",
+  "description": "Documentation for accessing api ressources",
+  "apidoc": {
+    "title": "Gaming API",
+    "url" : "https://github.com"
+  }
+}
