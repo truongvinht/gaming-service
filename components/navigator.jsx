@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-const Navigator = () => {
+const Navigator = ({appTitle}) => {
   const [navbar, setNavbar] = useState(false);
   return (
     <nav className="w-full bg-gray-800 shadow">
@@ -11,7 +11,7 @@ const Navigator = () => {
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
               <a href="#">
-                <h2 className="text-2xl text-white font-bold">Gaming Service</h2>
+                <h2 className="text-2xl text-white font-bold">{appTitle}</h2>
               </a>
               <div className="md:hidden">
                 <button
@@ -64,8 +64,13 @@ const Navigator = () => {
                   </Link>
                 </li>
                 <li className="text-white">
+                  <Link href="/genshinimpact">
+                    Genshin Impact
+                  </Link>
+                </li>
+                <li className="text-white">
                   <Link href="/about">
-                    About US
+                    About
                   </Link>
                 </li>
               </ul>
