@@ -9,7 +9,7 @@ const Navigator = ({appTitle}) => {
     <nav className="w-full bg-gray-800 shadow">
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
-            <div className="flex items-center justify-between py-3 md:py-5 md:block">
+            <div className="flex items-center justify-between py-3 md:block">
               <a href="#">
                 <h2 className="text-2xl text-white font-bold">{appTitle}</h2>
               </a>
@@ -64,8 +64,8 @@ const Navigator = ({appTitle}) => {
                   </Link>
                 </li>
                 <li className="text-white">
-                  <Link href="/genshinimpact">
-                    Genshin Impact
+                  <Link href="/genshin">
+                    Genshin
                   </Link>
                 </li>
                 <li className="text-white">

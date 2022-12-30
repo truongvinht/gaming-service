@@ -22,7 +22,6 @@ const ElementsOverview = () => {
         id="staff_grid"
         rowData={pulls}
         columnDefs={columnDefs}
-        style={{ height: '100%', width: '100%' }}
       ></AgGridReact>
       </div>
     </div>
