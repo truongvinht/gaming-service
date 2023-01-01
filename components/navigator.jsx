@@ -64,6 +64,11 @@ const Navigator = ({appTitle}) => {
                   </Link>
                 </li>
                 <li className="text-white">
+                  <Link href="/users">
+                    Benutzer
+                  </Link>
+                </li>
+                <li className="text-white">
                   <Link href="/genshin">
                     Genshin
                   </Link>
