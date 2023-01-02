@@ -3,6 +3,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 import Navigator from '../components/Navigator'
+import ReactQueryWrapper from './reactQueryWrapper';
 
 export default function RootLayout({ children }) {
   const title = 'Title'; 
@@ -11,7 +12,7 @@ export default function RootLayout({ children }) {
       <head />
       <body>
         <Navigator appTitle={title}/>
-        {children}
+        <ReactQueryWrapper>{children}</ReactQueryWrapper>
       </body>
     </html>
   )

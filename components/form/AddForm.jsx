@@ -2,6 +2,7 @@ import { useReducer } from "react";
 
 import FormItem from "./FormItem";
 import GreenButton from "../buttons/GreenButton";
+import RedButton from "../buttons/RedButton";
 import Message  from "../Message";
 
 const formReducer = (state, event) => {
@@ -14,7 +15,7 @@ const formReducer = (state, event) => {
 /**
  * Component for form
  */
-const AddForm = ({ formId, columns=1, handleSubmit, handleDelete=null, objForm, components}) => {
+const AddForm = ({ formId, columns=1, components}) => {
     const formClass = `w-full grid grid-cols-${columns} gap-3 py-3`
 
     if (components === undefined) {
@@ -39,7 +40,8 @@ const AddForm = ({ formId, columns=1, handleSubmit, handleDelete=null, objForm, 
                 {components.map((obj) => (
                     <FormItem key={obj.name} attribute_desc={obj} onChange={setFormData} />
                 ))}
-                <GreenButton label={'Speichern'} type='submit'  customStyle={'w-2/6'}/>
+                <GreenButton label={'Anlegen'} type='submit'  customStyle={'w-2/6'}/>
+                <RedButton label={'Zurücksetzen'} type='reset'  customStyle={'w-2/6'} />
             </form>
     );
 }

@@ -1,8 +1,16 @@
 import AddForm from "./AddForm";
+import EditForm from "./EditForm";
 
 const Form = ({ formId, columns=1, components}) => {
+
+    const flag = true;
+
     return (
-        <AddForm formId={formId} columns={columns} components={components} />
+        <div className="container mx-auto">
+            {flag?<AddForm formId={formId} columns={columns} components={components} />:
+            <EditForm formId={formId} columns={columns} components={components} />}
+            
+        </div>
     );
 }
 

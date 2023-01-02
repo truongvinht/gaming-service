@@ -10,5 +10,4 @@ const Head = ({description = 'Gaming Service'}) => {
   );
 };
 
-
 export default Head;
