@@ -4,15 +4,20 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 import Navigator from '../components/Navigator'
 import ReactQueryWrapper from './reactQueryWrapper';
+import ReactReducer from './reactReducer';
 
 export default function RootLayout({ children }) {
-  const title = 'Title'; 
+  const title = 'Gaming'; 
   return (
     <html>
       <head />
       <body>
         <Navigator appTitle={title}/>
-        <ReactQueryWrapper>{children}</ReactQueryWrapper>
+        <ReactQueryWrapper>
+          <ReactReducer>
+          {children}
+          </ReactReducer>
+        </ReactQueryWrapper>
       </body>
     </html>
   )

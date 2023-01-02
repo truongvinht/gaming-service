@@ -3,39 +3,65 @@ import ContentTable from "../../components/ContentTable";
 import { BiUserPlus, BiEdit, BiTrashAlt } from "react-icons/bi";
 import { useState } from "react";
 import Form from "../../components/form/Form";
-import { getUser } from "../../utils/helper";
+import { deleteUser, getUsers } from "../../utils/helper";
 import { useQuery } from "react-query";
+import { useSelector, useDispatch } from "react-redux";
+import { useQueryClient, useMutation } from "react-query";
+import {
+  toggleChangeAction,
+  updateAction,
+  deleteAction,
+} from "../../redux/reducer";
 
 const UserHome = () => {
+  const visible = useSelector((state) => state.app.client.toggleForm);
+  const dispatch = useDispatch();
 
-  const [visible, setVisble] = useState(false);
+  const queryClient = useQueryClient();
+
+  const onUpdate = (id) => {
+    dispatch(toggleChangeAction());
+    if (visible) {
+      console.log("onUpdate is visible");
+      dispatch(updateAction(id));
+    }
+  };
+
+  const onDelete = async (id) => {
+     if (!visible) {
+	//   
+	try{
+		await dispatch(deleteAction(id));
+		await deleteUser(id);
+		await queryClient.prefetchQuery('users', getUsers);
+		await dispatch(deleteAction(null));
+	}catch(err) {
+		console.log(err)
+	}
+     } else {
+		console.log("delete failed");
+	 }
+  };
 
   const [columnDefs] = useState([
-    { headerName: "Name", field: "name" },
+    { headerName: "Benutzername", field: "username" },
     { headerName: "Email", field: "email" },
-    {
-      headerName: "Status",
-      field: "status",
-      cellRenderer: (params) => {
-        return (
-          <button className="cursor">
-            <span className="bg-green-500 text-white px-5 py-1 rounded">
-              'Value ' + {params.value}
-            </span>
-          </button>
-        );
-      },
-    },
     {
       headerName: "Actions",
       field: "actions",
       cellRenderer: (params) => {
         return (
           <div className="px-5 py-1 justify-around gap-5">
-            <button className="cursor">
+            <button
+              className="cursor"
+              onClick={(e) => onUpdate(e.currentTarget.value)} >
               <BiEdit color="green" size="25" />
             </button>
-            <button className="cursor">
+            <button
+              className="cursor"
+              value={params.data._id}
+              onClick={(e) => onDelete(e.currentTarget.value)}
+            >
               <BiTrashAlt color="red" size="25" />
             </button>
           </div>
@@ -44,45 +70,51 @@ const UserHome = () => {
     },
   ]);
 
-  const {isLoading, isError, data, error } = useQuery('users', getUser);
+  const { isLoading, isError, data, error } = useQuery("users", getUsers);
 
+  if (isLoading) return <div>Wird Geladen...</div>;
 
-  if (isLoading) return (<div>Wird Geladen...</div>);
-
-  if (isError) return (<div>Fehler: {error}</div>);
+  if (isError) return <div>Fehler: {error}</div>;
 
   const rows = data.data;
 
   const handler = () => {
-    setVisble(!visible);
+    dispatch(toggleChangeAction());
   };
 
   // prepare meta for form
   let compList = [];
 
   compList.push({
-    required: false,
-    name: 'Vorname',
-    type: 'text',
-    maxLength: '100',
-    value: 'firstname'
+    required: true,
+    name: "Benutzername",
+    type: "text",
+    maxLength: "100",
+    value: "username",
   });
 
   compList.push({
     required: true,
-    name: 'Nachname',
-    type: 'text',
-    maxLength: '100',
-    value: 'surname'
+    name: "Vorname",
+    type: "text",
+    maxLength: "100",
+    value: "firstname",
   });
-
 
   compList.push({
     required: true,
-    name: 'Email',
-    type: 'text',
-    maxLength: '100',
-    value: 'email'
+    name: "Nachname",
+    type: "text",
+    maxLength: "100",
+    value: "surname",
+  });
+
+  compList.push({
+    required: true,
+    name: "Email",
+    type: "text",
+    maxLength: "100",
+    value: "email",
   });
 
   return (
@@ -93,7 +125,10 @@ const UserHome = () => {
 
       <div className="container mx-auto flex justify-between py-5 border-b">
         <div className="left flex gap-3">
-          <button onClick={handler} className="flex bg-indigo-500 text-white px-5 py-2 border rounded-md hover:bg-gray-50 hover:border-indigo-500 hover:text-gray-800">
+          <button
+            onClick={handler}
+            className="flex bg-indigo-500 text-white px-5 py-2 border rounded-md hover:bg-gray-50 hover:border-indigo-500 hover:text-gray-800"
+          >
             Neuer Benutzer{" "}
             <span className="px-1">
               <BiUserPlus size={23} />
@@ -101,7 +136,11 @@ const UserHome = () => {
           </button>
         </div>
       </div>
-        {visible?<Form formId={'example'} columns={2} components={compList} />:<div />}
+      {visible ? (
+        <Form formId={"example"} columns={2} components={compList} />
+      ) : (
+        <div />
+      )}
       {/** collapsable form */}
       <div className="container mx-auto">
         {/** table */}

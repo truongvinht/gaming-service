@@ -1,5 +1,4 @@
 import { Container } from "postcss";
-import Table from "../../components/table";
 
 const GenshinHome = () => {
   return (
@@ -20,7 +19,7 @@ const GenshinHome = () => {
       </div>
       <div className="container mx-auto">
         {/** table */}
-        <Table></Table>
+        
       </div>
     </div>
   );

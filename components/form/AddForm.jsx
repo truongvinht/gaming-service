@@ -4,34 +4,44 @@ import FormItem from "./FormItem";
 import GreenButton from "../buttons/GreenButton";
 import RedButton from "../buttons/RedButton";
 import Message  from "../Message";
-
-const formReducer = (state, event) => {
-    return {
-        ...state,
-        [event.target.name]: event.target.value
-    }
-}
+import { useQueryClient, useMutation } from "react-query";
+import { addUser, getUsers } from "../../utils/helper";
 
 /**
  * Component for form
  */
-const AddForm = ({ formId, columns=1, components}) => {
+const AddForm = ({ formId, columns=1, components, formData, setFormData}) => {
     const formClass = `w-full grid grid-cols-${columns} gap-3 py-3`
 
     if (components === undefined) {
         return (<div>Input missing!</div>);
     }
-    
-    const [formData, setFormData] = useReducer(formReducer, {}); 
+    const queryClient = useQueryClient();
+    const addMutation = useMutation(addUser, {
+        onSuccess: () => {
+            queryClient.prefetchQuery('users', getUsers);
+        }
+    });
 
     const onSubmit = (e) => {
         e.preventDefault();
         if(Object.keys(formData).length == 0)return console.log('empty');
-        console.log(formData);
+        let { username, firstname, surname, email} = formData;
 
+        const model ={
+            username,
+            firstname,
+            surname,
+            email,
+        };
+        addMutation.mutate(model);
     };
 
-    if (Object.keys(formData).length == 3) {
+    if (addMutation.isLoading) return (<div>Wird geladen...</div>);
+    if (addMutation.isError) return (<div>Fehlgeschlagen... {addMutation.error.message}</div>);
+
+
+    if (addMutation.isSuccess) {
         return (<Message msg={'Daten wurden gespeichert'}></Message>);
     }
 
@@ -41,7 +51,6 @@ const AddForm = ({ formId, columns=1, components}) => {
                     <FormItem key={obj.name} attribute_desc={obj} onChange={setFormData} />
                 ))}
                 <GreenButton label={'Anlegen'} type='submit'  customStyle={'w-2/6'}/>
-                <RedButton label={'Zurücksetzen'} type='reset'  customStyle={'w-2/6'} />
             </form>
     );
 }

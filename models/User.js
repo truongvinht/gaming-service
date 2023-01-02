@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema({
     /* username */
     type: String,
     required: [true, "Please provide username."],
-    index: { unique: true }
+    unique: true
   },
   firstname: {
     /* first name */
@@ -21,6 +21,7 @@ const UserSchema = new mongoose.Schema({
   password: {
     /* password */
     type: String,
+    default: 'test',
     required: [true, "Please provide a password."],
   },
   image_url: {
@@ -34,6 +35,7 @@ const UserSchema = new mongoose.Schema({
   role: {
     /* user role */
     type: String,
+    default: 'user',
     required: [true, "Please provide a role."],
   },
 });

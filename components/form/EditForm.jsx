@@ -1,27 +1,35 @@
-import { useReducer } from "react";
-
 import FormItem from "./FormItem";
 import GreenButton from "../buttons/GreenButton";
 import  Message  from "../Message";
 
-const formReducer = (state, event) => {
-    return {
-        ...state,
-        [event.target.name]: event.target.value
-    }
-}
+import { useQuery } from "react-query";
+import { getUser } from "../../utils/helper";
 
 /**
  * Component for form
  */
-const EditForm = ({ formId, columns=1, handleSubmit, handleDelete=null, objForm, components}) => {
-    const formClass = `w-full grid grid-cols-${columns} gap-3 py-3`
+const EditForm = ({ formId, columns=1, handleSubmit, handleDelete=null, objForm, components, formData, setFormData, objectId}) => {
 
-    if (components === undefined) {
+    const formClass = `w-full grid grid-cols-${columns} gap-3 py-3`;
+
+    console.log(objectId);
+    const {isLoading, isError, data, error} = useQuery(['users', objectId], () => getUser(objectId));
+    // const {username} =  data;
+
+
+     if (isLoading) {
+        return (<div>Wird geladen...</div>);
+    }
+
+    if (isError) {
+        return (<div>Fehler beim Laden...</div>);
+    }
+    console.log(data);
+
+    if (components == undefined) {
         return (<div>Input missing!</div>);
     }
     
-    const [formData, setFormData] = useReducer(formReducer, {}); 
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -29,10 +37,6 @@ const EditForm = ({ formId, columns=1, handleSubmit, handleDelete=null, objForm,
         console.log(formData);
 
     };
-
-    if (Object.keys(formData).length == 3) {
-        return (<Message msg={'Daten wurden gespeichert'}></Message>);
-    }
 
     return (
         <form className={formClass} id={formId} onSubmit={onSubmit}>
