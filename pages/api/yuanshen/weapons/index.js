@@ -1,6 +1,6 @@
-import apiHandler from '../../../../utils/findAllHandler'
+import {findAllHandler} from '../../../../utils/mongoHandler'
 import Model from '../../../../models/PullObject'
 
 export default async function handler(req, res) {
-    await apiHandler(Model, req, res, {type: 'Waffe'});
+    await findAllHandler(Model, req, res, {type: 'Waffe'});
 }

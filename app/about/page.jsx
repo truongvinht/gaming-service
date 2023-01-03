@@ -1,5 +1,4 @@
 import { Container } from "postcss";
-import Table from "../../components/table";
 
 const GenshinHome = () => {
   return (
