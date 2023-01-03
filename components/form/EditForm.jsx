@@ -3,7 +3,7 @@ import GreenButton from "../buttons/GreenButton";
 import  Message  from "../Message";
 
 import { useQuery } from "react-query";
-import { getUser } from "../../utils/helper";
+import { getUser } from "../../utils/apiHandler";
 
 /**
  * Component for form

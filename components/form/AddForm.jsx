@@ -5,7 +5,7 @@ import GreenButton from "../buttons/GreenButton";
 import RedButton from "../buttons/RedButton";
 import Message  from "../Message";
 import { useQueryClient, useMutation } from "react-query";
-import { addUser, getUsers } from "../../utils/helper";
+import { addUser, getUsers } from "../../utils/apiHandler";
 
 /**
  * Component for form

@@ -3,7 +3,7 @@ import ContentTable from "../../components/ContentTable";
 import { BiUserPlus, BiEdit, BiTrashAlt } from "react-icons/bi";
 import { useState } from "react";
 import Form from "../../components/form/Form";
-import { deleteUser, getUsers } from "../../utils/helper";
+import { deleteUser, getUsers } from "../../utils/apiHandler";
 import { useQuery } from "react-query";
 import { useSelector, useDispatch } from "react-redux";
 import { useQueryClient, useMutation } from "react-query";
