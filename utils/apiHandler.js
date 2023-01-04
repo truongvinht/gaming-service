@@ -1,5 +1,23 @@
 const BASE_URL = 'http://localhost:3000';
 
+
+// general API access
+
+export const getAllObjects = async(path) => {
+    const response = await fetch( `${BASE_URL}/api/${path}`);
+    const json = await response.json();
+    return json;
+};
+
+export const getSingleObject = async(path) => {
+    const response = await fetch( `${BASE_URL}/api/${path}`);
+    const json = await response.json();
+    if (json) return json;
+    return {};
+};
+
+// USER API
+
 export const getUsers = async() => {
     const response = await fetch( `${BASE_URL}/api/users`);
     const json = await response.json();
