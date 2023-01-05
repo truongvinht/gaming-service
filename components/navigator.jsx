@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-const Navigator = ({appTitle}) => {
+const Navigator = ({appTitle, nodes ={}}) => {
   const [navbar, setNavbar] = useState(false);
   return (
     <nav className="w-full bg-gray-800 shadow">

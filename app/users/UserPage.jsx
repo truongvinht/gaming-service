@@ -95,26 +95,18 @@ const UserHome = () => {
 
   compList.push({
     required: true,
-    name: "Vorname",
-    type: "text",
-    maxLength: "100",
-    value: "firstname",
-  });
-
-  compList.push({
-    required: true,
-    name: "Nachname",
-    type: "text",
-    maxLength: "100",
-    value: "surname",
-  });
-
-  compList.push({
-    required: true,
     name: "Email",
     type: "text",
     maxLength: "100",
     value: "email",
+  });
+
+  compList.push({
+    required: true,
+    name: "Passwort",
+    type: "password",
+    maxLength: "100",
+    value: "password",
   });
 
   return (

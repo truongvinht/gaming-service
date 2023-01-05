@@ -26,13 +26,14 @@ const AddForm = ({ formId, columns=1, components, formData, setFormData}) => {
     const onSubmit = (e) => {
         e.preventDefault();
         if(Object.keys(formData).length == 0)return console.log('empty');
-        let { username, firstname, surname, email} = formData;
+        let { username, firstname, surname, email, password} = formData;
 
         const model ={
             username,
             firstname,
             surname,
             email,
+            password,
         };
         addMutation.mutate(model);
     };

@@ -11,12 +11,12 @@ const UserSchema = new mongoose.Schema({
   firstname: {
     /* first name */
     type: String,
-    required: [true, "Please provide first name."],
+    // required: [false, "Please provide first name."],
   },
   surname: {
     /* surname */
     type: String,
-    required: [true, "Please provide surname."],
+    // required: [true, "Please provide surname."],
   },
   password: {
     /* password */
