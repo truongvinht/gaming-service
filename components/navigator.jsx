@@ -78,6 +78,11 @@ const Navigator = ({appTitle, nodes ={}}) => {
                     About
                   </Link>
                 </li>
+                <li className="text-white">
+                  <Link href="/auth/login">
+                    Anmelden
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>

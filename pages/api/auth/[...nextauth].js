@@ -1,27 +1,31 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import mongoConnector from "../../../utils/mongoConnector";
-import User from "../../../models/User";
-import bcrypt from 'bcrypt'
 
 export default NextAuth({
   providers: [
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Username", type: "username", placeholder: "jsmith" },
+        username: { label: "Username", type: "username"},
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        await mongoConnector();
-        console.log(credentials);
+
         const username = credentials.username;
         const password = credentials.password;
-        const user = await User.findOne({ username });
-        if (!user) {
-          throw new Error("You haven't registered yet");
+        const response = await fetch (`${process.env.NEXTAUTH_URL}/api/users/validate`,{
+          method:'POST',
+          headers: {
+            'Content-Type':'application/json'
+          },
+          body: JSON.stringify({username, password})
+        });
+
+        if (response.ok) {
+          return res.json();
+        } else {
+          throw new Error("User doesnt exist or bad password");
         }
-        if (user) return signinUser({ password, user });
       },
     }),
     // ...add more providers here
@@ -40,14 +44,3 @@ export default NextAuth({
   // Enable debug messages in the console if you are having problems
   debug: process.env.NODE_ENV === "development",
 });
-
-const signinUser = async ({ password, user }) => {
-  if (!user.password) {
-    throw new Error("Please enter password");
-  }
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) {
-    throw new Error("Password Incorrect.");
-  }
-  return user;
-};
