@@ -52,6 +52,37 @@ export const fetchGameRecords = async (path, ltuid, ltoken, uid, lang = 'en-us')
   );
 };
 
+export const postGameRecords = async (path, ltuid, ltoken, uid, lang = 'en-us') => {
+
+  const dsKey = generateDs(isChinese(uid));
+
+  const headers = {
+    //required headers
+    "x-rpc-app_version": "1.5.0",
+    "x-rpc-client_type": "4",
+    "x-rpc-language": lang,
+    "Accept-Encoding": "gzip, deflate",
+    Accept: "*/*",
+    //authentications headers
+    ds: dsKey,
+    // recommended headers
+    "user-agent": USER_AGENT,
+    Cookie: `ltuid=${ltuid}; ltoken=${ltoken}`,
+  };
+
+  return fetch(
+    `${getGameRecordUrl(isChinese(uid))}/${path}`,
+    {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify({
+        server: getServer(uid),
+        role_id: uid
+      })
+    }
+  );
+};
+
 export const getHoyolabUrl = (isChinese = false) => {
   if (isChinese) {
     return "https://bbs-api.mihoyo.com";

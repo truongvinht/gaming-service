@@ -26,13 +26,14 @@ export default async function handler(req, res) {
   }
 
   const hoyoReq = await fetchGameRecords(
-    'genshin/api/spiralAbyss',
+    'genshin/api/dailyNote',
     ltuid,
     ltoken,
     uid,
     lang
   );
 
+  //TODO: check ltuid matching for uid => 500 instead of 200
   if (hoyoReq.ok) {
     const data = await hoyoReq.json();
     res.status(200).json(data);

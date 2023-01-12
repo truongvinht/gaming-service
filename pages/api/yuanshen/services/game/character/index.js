@@ -1,4 +1,4 @@
-import { fetchGameRecords } from "../../../../../../utils/hoyoverseHandler";
+import { postGameRecords } from "../../../../../../utils/hoyoverseHandler";
 
 // external access
 export default async function handler(req, res) {
@@ -19,15 +19,20 @@ export default async function handler(req, res) {
   const ltoken = h.ltoken;
   const uid = h.uid;
 
-  const hoyoReq = await fetchGameRecords(
-    'genshin/api/dailyNote',
+  let lang = 'en-us';
+
+  if (h.hasOwnProperty('lang')) {
+    lang = h.lang;
+  }
+
+  const hoyoReq = await postGameRecords(
+    'genshin/api/character',
     ltuid,
     ltoken,
     uid,
-    'de-de'
+    lang
   );
 
-  //TODO: check ltuid matching for uid => 500 instead of 200
   if (hoyoReq.ok) {
     const data = await hoyoReq.json();
     res.status(200).json(data);

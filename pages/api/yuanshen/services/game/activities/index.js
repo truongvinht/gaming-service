@@ -19,12 +19,18 @@ export default async function handler(req, res) {
   const ltoken = h.ltoken;
   const uid = h.uid;
 
+  let lang = 'en-us';
+
+  if (h.hasOwnProperty('lang')) {
+    lang = h.lang;
+  }
+
   const hoyoReq = await fetchGameRecords(
     'genshin/api/activities',
     ltuid,
     ltoken,
     uid,
-    'de-de'
+    lang
   );
 
   if (hoyoReq.ok) {
