@@ -3,18 +3,43 @@ import crypto from "crypto";
 const USER_AGENT =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36";
 // fetch any url
-export const fetchPath = async (method, headers, url, path, parameter = undefined, body = undefined) => {
+export const fetchPath = async (method, url, path, parameter = undefined, body = undefined) => {
+
+  const headers = {
+    //required headers
+    "x-rpc-app_version": "1.5.0",
+    "x-rpc-client_type": "4"
+  };
 
   let param = '';
 
   if (parameter !== undefined && parameter != null) {
     param = `?${new URLSearchParams(parameter)}`;
   }
-  console.log(`${url}/${path}${param}`);
+  
   return await fetch(
     `${url}/${path}${param}`,
     {
       method: method,
+      headers: headers,
+    }
+  );
+};
+
+export const fetchBanner = async (banner, lang, region = 'os_usa') => {
+
+  // standard banner
+  //a37a19624270b092e7250edfabce541a3435c2
+  const headers = {
+    //required headers
+    "x-rpc-app_version": "1.5.0",
+    "x-rpc-client_type": "4"
+  };
+  
+  return await fetch(
+    `https://webstatic-sea.hoyoverse.com/hk4e/gacha_info/${region}/${banner}/${lang}.json`,
+    {
+      method: 'GET',
       headers: headers,
     }
   );
@@ -44,6 +69,40 @@ export const fetchGameRecords = async (path, ltuid, ltoken, uid, lang = 'en-us')
         server: getServer(uid),
         role_id: uid,
         schedule_type: 1,
+      }),
+    {
+      method: "GET",
+      headers: headers,
+    }
+  );
+};
+
+export const redeemCode = async (account_id, cookie_token, uid, code) => {
+
+  const dsKey = generateDs(isChinese(uid));
+
+  const headers = {
+    //required headers
+    "x-rpc-app_version": "1.5.0",
+    "x-rpc-client_type": "4",
+    "x-rpc-language": 'en',
+    "Accept-Encoding": "gzip, deflate",
+    Accept: "*/*",
+    //authentications headers
+    ds: dsKey,
+    // recommended headers
+    "user-agent": USER_AGENT,
+    Cookie: `account_id=${account_id}; cookie_token=${cookie_token}`,
+  };
+
+  return fetch(
+    `https://sg-hk4e-api.hoyoverse.com/common/apicdkey/api/webExchangeCdkey?` +
+      new URLSearchParams({
+        region: getServer(uid),
+        uid: uid,
+        cdkey: code,
+        game_biz: 'hk4e_global',
+        lang:'en'
       }),
     {
       method: "GET",
@@ -87,7 +146,7 @@ export const getHoyolabUrl = (isChinese = false) => {
   if (isChinese) {
     return "https://bbs-api.mihoyo.com";
   } else {
-    return "https://api-os-takumi.hoyoverse.com/community";
+    return "https://api-os-takumi.mihoyo.com/community";
   }
 };
 
