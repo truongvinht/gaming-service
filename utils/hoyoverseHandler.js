@@ -111,6 +111,33 @@ export const redeemCode = async (account_id, cookie_token, uid, code) => {
   );
 };
 
+
+export const checkinInfo = async (account_id, cookie_token, uid) => {
+
+  const dsKey = generateDs(isChinese(uid));
+
+  const headers = {
+    //required headers
+    "x-rpc-app_version": "1.5.0",
+    "x-rpc-client_type": "4",
+    //authentications headers
+    ds: dsKey,
+    Cookie: `account_id=${account_id}; cookie_token=${cookie_token}`,
+  };
+
+  return fetch(
+    `https://hk4e-api-os.hoyoverse.com/event/sol/home?` +
+      new URLSearchParams({
+        act_id: 'e202102251931481',
+        lang:'en-us'
+      }),
+    {
+      method: "GET",
+      headers: headers,
+    }
+  );
+};
+
 export const postGameRecords = async (path, ltuid, ltoken, uid, lang = 'en-us') => {
 
   const dsKey = generateDs(isChinese(uid));
