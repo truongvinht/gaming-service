@@ -16,14 +16,14 @@ export default function RootLayout({ children }) {
     <html>
       <head />
       <body>
-        <provider>
+        <Provider>
         <Navigator appTitle={title}/>
         <ReactQueryWrapper>
           <ReactReducer>
           {children}
           </ReactReducer>
         </ReactQueryWrapper>
-        </provider>
+        </Provider>
       </body>
     </html>
   )

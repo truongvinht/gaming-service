@@ -1,4 +1,4 @@
-// __tests__/animal.test.js
+// weapons.test.js
 // 🚨 Remember to keep your `*.test.js` files out of your `/pages` directory!
 import { createMocks } from 'node-mocks-http';
 import allHandler from './index';
