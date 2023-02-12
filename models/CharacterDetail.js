@@ -1,11 +1,14 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
+import PullObject from "./PullObject";
+import Talent from "./Talent";
 
 /* CharacterDetailSchema will correspond to a collection in your MongoDB database. */
 const CharacterDetailSchema = new mongoose.Schema({
-  character_id: {
+  character: {
     /* related character id */
-    type: String,
-    required: [true, 'Please provide an id.'],
+    type: mongoose.Schema.Types.ObjectId,
+    required: [true, "Please provide a character."],
+    ref: "PullObject",
   },
   birthday: {
     /* character birthday */
@@ -19,14 +22,28 @@ const CharacterDetailSchema = new mongoose.Schema({
     /* logo for material  */
     type: String,
   },
-  talent_id: {
+  talent: {
     /* required talent */
-    type: String
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Talent",
   },
-  weekly_drop_id: {
+  weekly_drop: {
     /* weekly boss id */
     type: String,
-  }
-})
+  },
+});
 
-export default mongoose.models.CharacterDetailSchema || mongoose.model('CharacterDetail', CharacterDetailSchema)
+
+export default mongoose.models.CharacterDetail || mongoose.model('CharacterDetail', CharacterDetailSchema)
+
+// let model = undefined;
+
+// try {
+//   model = mongoose.model("CharacterDetail");
+// } catch (error) {
+//   model =
+//     mongoose.models.CharacterDetail ||
+//     mongoose.model("CharacterDetail", CharacterDetailSchema);
+// }
+
+// export default model;

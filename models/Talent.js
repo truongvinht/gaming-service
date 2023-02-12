@@ -23,4 +23,4 @@ const TalentSchema = new mongoose.Schema({
   }
 })
 
-export default mongoose.models.TalentSchema || mongoose.model('Talent', TalentSchema)
+export default mongoose.models.Talent || mongoose.model('Talent', TalentSchema)

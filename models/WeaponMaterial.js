@@ -23,4 +23,4 @@ const WeaponMaterialSchema = new mongoose.Schema({
   }
 })
 
-export default mongoose.models.WeaponMaterialSchema || mongoose.model('WeaponMaterial', WeaponMaterialSchema)
+export default mongoose.models.WeaponMaterial || mongoose.model('WeaponMaterial', WeaponMaterialSchema)
