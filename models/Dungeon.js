@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import Location from './Location'
 
 /* DungeonSchema will correspond to a collection in your MongoDB database. */
 const DungeonSchema = new mongoose.Schema({
@@ -8,9 +9,10 @@ const DungeonSchema = new mongoose.Schema({
         unique: true,
         required: [true, 'Please provide a name for Dungeon.'],
       },
-      location_id: {
-        /* ref id dungeon */
-        type: String,
+      location: {
+        /* ref location */
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Location",
       },
       image_url: {
         /* Url to dungeon logo */

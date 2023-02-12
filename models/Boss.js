@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import Location from './Location'
 
 /* BossSchema will correspond to a collection in your MongoDB database. */
 const BossSchema = new mongoose.Schema({
@@ -20,9 +21,10 @@ const BossSchema = new mongoose.Schema({
         /* boss resin cost */
         type: Number,
     },
-    location_id: {
-        /* ref id boss */
-        type: String,
+    location: {
+        /* ref location */
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Location",
     },
     image_url: {
         /* Url to boss logo */

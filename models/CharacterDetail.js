@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import PullObject from "./PullObject";
 import Talent from "./Talent";
+import Location from "./Location";
 
 /* CharacterDetailSchema will correspond to a collection in your MongoDB database. */
 const CharacterDetailSchema = new mongoose.Schema({
@@ -9,6 +10,10 @@ const CharacterDetailSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: [true, "Please provide a character."],
     ref: "PullObject",
+  },
+  location: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Location",
   },
   birthday: {
     /* character birthday */

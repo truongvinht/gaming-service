@@ -5,5 +5,5 @@ import Model from '../../../../../models/CharacterDetail'
 export default async function handler(req, res) {
     const { method } = req;
 
-    await findAllHandler(Model, req, res, {}, "character talent");
+    await findAllHandler(Model, req, res, {}, "character location talent");
 }
