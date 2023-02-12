@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import Dungeon from './Dungeon'
 
 /* WeaponMaterialSchema will correspond to a collection in your MongoDB database. */
 const WeaponMaterialSchema = new mongoose.Schema({
@@ -8,9 +9,10 @@ const WeaponMaterialSchema = new mongoose.Schema({
     unique: true,
     required: [true, 'Please provide a name for Material.'],
   },
-  dungeon_id: {
-    /* weapon material dungeon id */
-    type: String,
+  dungeon: {
+      /* ref id dungeon */
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Dungeon",
   },
   image_url: {
     /* Url to material logo */
