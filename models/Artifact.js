@@ -1,4 +1,5 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
+import Dungeon from './Dungeon';
 
 /* ArtifactSchema will correspond to a collection in your MongoDB database. */
 const ArtifactSchema = new mongoose.Schema({
@@ -25,14 +26,15 @@ const ArtifactSchema = new mongoose.Schema({
         /* four set description */
         type: String,
     },
-    dungeon_id: {
+    dungeon: {
         /* ref id dungeon */
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Dungeon",
     },
     image_url: {
         /* Url to artifact logo */
         type: String,
     }
-})
+});
 
 export default mongoose.models.Artifact || mongoose.model('Artifact', ArtifactSchema)
