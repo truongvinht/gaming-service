@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+.card * {
+  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Styles for Cards */
+.card {
+  display: inline-block;
+  width: 250px;
+  height: 300px;
+  overflow: hidden;
+  border: 1.25px solid rgb(233, 233, 233);
+  border-radius: 16px;
+  margin: 10px;
+  transition: 0.5s all;
+  --shadow: transparent;
+  box-shadow: 0 0 10px 5px var(--shadow);
+  position: relative;
+  font-size: 100%;
+}
+
+.card_gold {
+  border-color: gold;
+}
+
+.card_purple {
+  border-color: purple;
+}
+
+.card_bg_weapon_5_star {
+  background-image: url("https://static.wikia.nocookie.net/gensin-impact/images/7/76/Background_Item_5_Star.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.card_bg_weapon_4_star {
+  background-image: url("https://static.wikia.nocookie.net/gensin-impact/images/e/ec/Background_Item_4_Star.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.card_bg_weapon_3_star {
+  background-image: url("https://static.wikia.nocookie.net/gensin-impact/images/2/20/Background_Item_3_Star.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.card:hover {
+  --shadow: rgba(53, 53, 53, 0.103);
+  /* transform: rotateY(180deg) translate(20px, 20px);
+  background: pink; */
+}
+
+.card:hover div {
+  pointer-events: initial;
+  opacity: 1;
+}
+
+.card * {
+  margin: 0;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.custom_img50 {
+  width: 50% !important;
+  height: 50% !important;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+
+}
+
+.main_content {
+  padding: 25px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.5s all;
+}
+.artifact_title {
+  font-weight: bold;
+  font-size: 70%;
+}
+.artifact_description {
+  color: grey;
+  font-size: 60%;
+}
+
+.artifact_details {
+  position: absolute;
+  bottom: 10 !important;
+  width: 80%;
+}
+
+.domain_title {
+  color: white;
+  font-size: 60%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 10px;
+  text-shadow: 0px 0px 4px black;
+}
+
+.domain_img {
+  height: 40px !important;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 2px;
+}
+
+.element {
+  color: grey;
+  font-size: 100%;
+}
+
+.card_name {
+  font-weight: bold;
+  font-size: 100%;
+}
+
+h6.card_name {
+  color: white;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 10px;
+  text-shadow: 0px 0px 4px black;
+}
+
+.info ul {
+  padding: 10px;
+  padding-top: 0px;
+  border-radius: 7px;
+}
+
+.info li {
+  list-style-type: none;
+  margin: 0;
+}
+
+.info {
+  color: rgb(83, 83, 83);
+  position: relative;
+  overflow: hidden;
+}
+
+.info.likes {
+  margin-top: 25px;
+}
+
+.label {
+  font-weight: bold;
+  font-size: 80%;
+}
+
+.btn_container {
+  text-align: right;
+  padding: 10px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.btn {
+  --accent: grey;
+  cursor: pointer;
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 60%;
+  letter-spacing: 1px;
+  transition: 0.5s all;
+  outline: none;
+}
+
+.btn:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.edit.btn {
+  --accent: green;
+}
+
+.delete.btn {
+  --accent: red;
+  margin-left: 10px;
+}
+
+.view.btn {
+  --accent: blue;
+  margin-left: 10px;
+}
+
+/* Delete Pet */
+.pet-container {
+  width: 100%;
+}
+
+.confirmation-box.show {
+  display: block;
+}
