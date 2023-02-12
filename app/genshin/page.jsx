@@ -13,6 +13,12 @@ const GenshinHome = () => {
         <li>
           <a href='./genshin/elements'>Elemente</a>
         </li>
+        <li>
+          <a href='./genshin/characters'>Figuren</a>
+        </li>
+        <li>
+          <a href='./genshin/weapons'>Waffen</a>
+        </li>
       </ul>
    <div className="container mx-auto flex justify-between py-5 border-b">{/**
         <div className="left flex gap-3">

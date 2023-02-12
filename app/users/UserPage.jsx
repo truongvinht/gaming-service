@@ -6,7 +6,7 @@ import Form from "../../components/form/Form";
 import { deleteUser, getUsers } from "../../utils/apiHandler";
 import { useQuery } from "react-query";
 import { useSelector, useDispatch } from "react-redux";
-import { useQueryClient, useMutation } from "react-query";
+import { useQueryClient } from "react-query";
 import {
   toggleChangeAction,
   updateAction,
