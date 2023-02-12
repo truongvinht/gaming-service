@@ -33,17 +33,4 @@ const CharacterDetailSchema = new mongoose.Schema({
   },
 });
 
-
 export default mongoose.models.CharacterDetail || mongoose.model('CharacterDetail', CharacterDetailSchema)
-
-// let model = undefined;
-
-// try {
-//   model = mongoose.model("CharacterDetail");
-// } catch (error) {
-//   model =
-//     mongoose.models.CharacterDetail ||
-//     mongoose.model("CharacterDetail", CharacterDetailSchema);
-// }
-
-// export default model;
