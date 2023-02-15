@@ -32,6 +32,10 @@ const UserSchema = new mongoose.Schema({
     /* email name */
     type: String,
   },
+  discord_id: {
+    /* discord id */
+    type: String,
+  },
   role: {
     /* user role */
     type: String,
