@@ -1,20 +1,20 @@
-import Model from "../../../../models/User";
-import bcrypt from "bcrypt";
-import mongoConnector from "../../../../utils/mongoConnector";
+import bcrypt from 'bcrypt';
+import Model from '../../../../models/User';
+import mongoConnector from '../../../../utils/mongoConnector';
 
 export default async function handler(req, res) {
   const { method } = req;
 
-  if (method === "POST") {
-    const body = req.body;
+  if (method === 'POST') {
+    const { body } = req;
 
     // validation req username and pwd
-    if (!body.hasOwnProperty("username") || !body.hasOwnProperty("password")) {
+    if (!body.hasOwnProperty('username') || !body.hasOwnProperty('password')) {
       res.status(400).json();
       return;
     }
 
-    const username = body.username;
+    const { username } = body;
 
     try {
       await mongoConnector();

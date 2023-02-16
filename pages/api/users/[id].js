@@ -1,5 +1,5 @@
-import {findByIdHandler} from '../../../utils/mongoHandler'
-import Model from '../../../models/User'
+import { findByIdHandler } from '../../../utils/mongoHandler';
+import Model from '../../../models/User';
 
 /**
  * @api {get} /api/users/:id Request User information
@@ -12,5 +12,5 @@ import Model from '../../../models/User'
  * @apiSuccess {Boolean} success User is found.
  */
 export default async function handler(req, res) {
-    await findByIdHandler(Model, req, res)
+  await findByIdHandler(Model, req, res);
 }

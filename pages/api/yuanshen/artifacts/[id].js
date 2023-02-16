@@ -1,5 +1,5 @@
-import {findByIdHandler} from '../../../../utils/mongoHandler'
-import Model from '../../../../models/Artifact'
+import { findByIdHandler } from '../../../../utils/mongoHandler';
+import Model from '../../../../models/Artifact';
 
 /**
  * @api {get} /api/yuanshen/artifacts/:id Request Artifact information
@@ -12,5 +12,5 @@ import Model from '../../../../models/Artifact'
  * @apiSuccess {Boolean} success Artifact is found.
  */
 export default async function handler(req, res) {
-    await findByIdHandler(Model, req, res)
+  await findByIdHandler(Model, req, res);
 }

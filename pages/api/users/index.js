@@ -1,23 +1,23 @@
-import { findAllHandler } from "../../../utils/mongoHandler";
-import Model from "../../../models/User";
-import bcrypt from "bcrypt";
+import bcrypt from 'bcrypt';
+import { findAllHandler } from '../../../utils/mongoHandler';
+import Model from '../../../models/User';
 
 export default async function handler(req, res) {
   const { method } = req;
 
   // create a new user
-  if (method === "POST") {
+  if (method === 'POST') {
     // copy body obj
     let body = JSON.parse(JSON.stringify(req.body));
 
     const user = await Model.findOne({ username: body.username });
     if (user) {
-      res.status(200).json({ success: false, message: "already registered" });
+      res.status(200).json({ success: false, message: 'already registered' });
       return;
     }
 
     if (req.body.password == null || req.body.password === undefined) {
-      res.status(400).json({ success: false, message: "invalid password" });
+      res.status(400).json({ success: false, message: 'invalid password' });
       return;
     }
 

@@ -49,7 +49,7 @@ export const addUser = async (formData) => {
   }
 };
 
-export const updateUser = async (userid, formData) => {
+export const updateUser = async (userId, formData) => {
   try {
     const Options = {
       method: 'PUT',
