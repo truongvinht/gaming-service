@@ -19,5 +19,6 @@ module.exports = {
     'react/function-component-definition': 'off',
     'consistent-return': 'off',
     'react/prop-types': 'off',
+    'lines-around-directive ': 'off',
   },
 };
