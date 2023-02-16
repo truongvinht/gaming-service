@@ -1,12 +1,12 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 /* UserSchema will correspond to a collection in your MongoDB database. */
 const UserSchema = new mongoose.Schema({
   username: {
     /* username */
     type: String,
-    required: [true, "Please provide username."],
-    unique: true
+    required: [true, 'Please provide username.'],
+    unique: true,
   },
   firstname: {
     /* first name */
@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema({
     /* password */
     type: String,
     default: 'test',
-    required: [true, "Please provide a password."],
+    required: [true, 'Please provide a password.'],
   },
   image_url: {
     /* Url to user avatar */
@@ -40,8 +40,8 @@ const UserSchema = new mongoose.Schema({
     /* user role */
     type: String,
     default: 'user',
-    required: [true, "Please provide a role."],
+    required: [true, 'Please provide a role.'],
   },
 });
 
-export default mongoose.models.User || mongoose.model("User", UserSchema);
+export default mongoose.models.User || mongoose.model('User', UserSchema);

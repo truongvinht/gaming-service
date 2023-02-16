@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
 /* PullObjectSchema will correspond to a collection in your MongoDB database. */
 const PullObjectSchema = new mongoose.Schema({
@@ -12,34 +12,35 @@ const PullObjectSchema = new mongoose.Schema({
     /* The object type */
 
     type: String,
-    required: [true, "Please provide a type."]
+    required: [true, 'Please provide a type.'],
   },
   rating: {
     /* Object rating (3,4 or 5) */
 
     type: Number,
     default: 3,
-    required: [true, "Please provide a rating."]
+    required: [true, 'Please provide a rating.'],
   },
   element: {
     /* Element (for figure only) */
-    type: String
+    type: String,
   },
   wp_type: {
     /* weapon type */
 
     type: String,
-    required: [true, "Please provide a weapon type."]
+    required: [true, 'Please provide a weapon type.'],
   },
   obtained_from: {
     /* obtained from */
 
-    type: String
+    type: String,
   },
   image_url: {
     /* Url to pet image */
     type: String,
   },
-})
+});
 
-export default mongoose.models.PullObject || mongoose.model('PullObject', PullObjectSchema)
+export default mongoose.models.PullObject ||
+  mongoose.model('PullObject', PullObjectSchema);

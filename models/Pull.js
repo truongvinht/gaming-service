@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
 /* PullSchema will correspond to a collection in your MongoDB database. */
 const PullSchema = new mongoose.Schema({
@@ -11,12 +11,12 @@ const PullSchema = new mongoose.Schema({
   object_ref: {
     /* The object reference id */
     type: String,
-    required: [true, "Please provide reference id."]
+    required: [true, 'Please provide reference id.'],
   },
   order_index: {
     /* The order index required for multi pull */
     type: Number,
-    default: 0
+    default: 0,
   },
   banner: {
     /* Banner name */
@@ -28,8 +28,7 @@ const PullSchema = new mongoose.Schema({
     /* user id */
     type: Number,
     required: [true, 'Please provide player uid for this pull.'],
+  },
+});
 
-  }
-})
-
-export default mongoose.models.Pull || mongoose.model('Pull', PullSchema)
+export default mongoose.models.Pull || mongoose.model('Pull', PullSchema);

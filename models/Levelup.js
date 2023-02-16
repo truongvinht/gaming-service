@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 /* LevelupSchema will correspond to a collection in your MongoDB database. */
 const LevelupSchema = new mongoose.Schema({
@@ -44,4 +44,4 @@ const LevelupSchema = new mongoose.Schema({
 });
 
 export default mongoose.models.Levelup ||
-  mongoose.model("Levelup", LevelupSchema);
+  mongoose.model('Levelup', LevelupSchema);

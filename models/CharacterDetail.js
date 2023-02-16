@@ -1,19 +1,20 @@
-import mongoose from "mongoose";
-import PullObject from "./PullObject";
-import Talent from "./Talent";
-import Location from "./Location";
+/* eslint-disable no-unused-vars */
+import mongoose from 'mongoose';
+import PullObject from './PullObject';
+import Talent from './Talent';
+import Location from './Location';
 
 /* CharacterDetailSchema will correspond to a collection in your MongoDB database. */
 const CharacterDetailSchema = new mongoose.Schema({
   character: {
     /* related character id */
     type: mongoose.Schema.Types.ObjectId,
-    required: [true, "Please provide a character."],
-    ref: "PullObject",
+    required: [true, 'Please provide a character.'],
+    ref: 'PullObject',
   },
   location: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Location",
+    ref: 'Location',
   },
   birthday: {
     /* character birthday */
@@ -30,7 +31,7 @@ const CharacterDetailSchema = new mongoose.Schema({
   talent: {
     /* required talent */
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Talent",
+    ref: 'Talent',
   },
   weekly_drop: {
     /* weekly boss id */
@@ -38,4 +39,5 @@ const CharacterDetailSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.models.CharacterDetail || mongoose.model('CharacterDetail', CharacterDetailSchema)
+export default mongoose.models.CharacterDetail ||
+  mongoose.model('CharacterDetail', CharacterDetailSchema);

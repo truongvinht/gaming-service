@@ -1,4 +1,4 @@
-import { checkinInfo } from "../../../../../../utils/hoyoverseHandler";
+import { checkinInfo } from '../../../../../../utils/hoyoverseHandler';
 
 // external access
 export default async function handler(req, res) {
@@ -8,10 +8,9 @@ export default async function handler(req, res) {
 
   // from https://genshin.mihoyo.com/en/gift
   if (
-    !h.hasOwnProperty("account_id") ||
-    !h.hasOwnProperty("cookie_token") ||
-    !h.hasOwnProperty("uid") 
-    
+    !h.hasOwnProperty('account_id') ||
+    !h.hasOwnProperty('cookie_token') ||
+    !h.hasOwnProperty('uid')
   ) {
     res.status(400).json();
     return;
@@ -23,13 +22,7 @@ export default async function handler(req, res) {
   const uid = h.uid;
   const code = query.code;
 
-
-  const hoyoReq = await checkinInfo(
-    account_id,
-    cookie_token,
-    uid,
-    code
-  );
+  const hoyoReq = await checkinInfo(account_id, cookie_token, uid, code);
 
   //TODO: check ltuid matching for uid => 500 instead of 200
   if (hoyoReq.ok) {

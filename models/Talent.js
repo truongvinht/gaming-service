@@ -1,10 +1,11 @@
-import mongoose from 'mongoose'
+/* eslint-disable no-unused-vars */
+import mongoose from 'mongoose';
 import Dungeon from './Dungeon';
 
 /* TalentSchema will correspond to a collection in your MongoDB database. */
 const TalentSchema = new mongoose.Schema({
   name: {
-    /* talent name*/
+    /* talent name */
     type: String,
     unique: true,
     required: [true, 'Please provide a name for Talent.'],
@@ -12,7 +13,7 @@ const TalentSchema = new mongoose.Schema({
   dungeon: {
     /* ref id dungeon */
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Dungeon",
+    ref: 'Dungeon',
   },
   image_url: {
     /* Url to talent logo */
@@ -21,8 +22,8 @@ const TalentSchema = new mongoose.Schema({
   weekday: {
     /* available on weekday */
     type: [Number],
-    default:[]
-  }
-})
+    default: [],
+  },
+});
 
-export default mongoose.models.Talent || mongoose.model('Talent', TalentSchema)
+export default mongoose.models.Talent || mongoose.model('Talent', TalentSchema);
