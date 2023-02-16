@@ -1,15 +1,25 @@
 const BASE_URL = 'http://localhost:3000';
+const KEY = process.env.JWT_SECRET;
 
 // general API access
 
 export const getAllObjects = async (path) => {
-  const response = await fetch(`${BASE_URL}/api/${path}`);
+
+  const response = await fetch(`${BASE_URL}/api/${path}`, {
+    headers: {
+      'x-api-key': KEY,
+    },
+  });
   const json = await response.json();
   return json;
 };
 
 export const getSingleObject = async (path) => {
-  const response = await fetch(`${BASE_URL}/api/${path}`);
+  const response = await fetch(`${BASE_URL}/api/${path}`, {
+    headers: {
+      'x-api-key': process.env.JWT_SECRET,
+    },
+  });
   const json = await response.json();
   if (json) return json;
   return {};
