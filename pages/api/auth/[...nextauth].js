@@ -1,27 +1,28 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
+const KEY = process.env.JWT_SECRET;
+const URL = process.env.NEXTAUTH_URL;
+
 export default NextAuth({
   providers: [
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        username: { label: 'Username', type: 'username' },
-        password: { label: 'Password', type: 'password' },
+        username: { label: 'Username', type: 'text' },
+        password: { label: 'Password', type: 'text' },
       },
       async authorize(credentials, req) {
-        const {username} = credentials;
-        const {password} = credentials;
-        const response = await fetch(
-          `${process.env.NEXTAUTH_URL}/api/users/validate`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
-          }
-        );
+        const { username } = credentials;
+        const { password } = credentials;
+        const response = await fetch(`${URL}/api/users/validate`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': KEY,
+          },
+          body: JSON.stringify({ username, password }),
+        });
 
         if (response.ok) {
           return response.json();

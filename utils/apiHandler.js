@@ -17,7 +17,7 @@ export const getAllObjects = async (path) => {
 export const getSingleObject = async (path) => {
   const response = await fetch(`${BASE_URL}/api/${path}`, {
     headers: {
-      'x-api-key': process.env.JWT_SECRET,
+      'x-api-key': KEY,
     },
   });
   const json = await response.json();
@@ -41,6 +41,7 @@ export const addUser = async (formData) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'x-api-key': KEY,
       },
       body: JSON.stringify(formData),
     };
@@ -59,6 +60,7 @@ export const updateUser = async (userId, formData) => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'x-api-key': KEY,
       },
       body: JSON.stringify(formData),
     };
@@ -77,6 +79,7 @@ export const deleteUser = async (userId) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
+        'x-api-key': KEY,
       },
     };
 
