@@ -8,6 +8,7 @@ const GenshinPlayerSchema = new mongoose.Schema({
   player: {
     /* ref user */
     type: mongoose.Schema.Types.ObjectId,
+    unique: true,
     ref: 'User',
   },
   data: [

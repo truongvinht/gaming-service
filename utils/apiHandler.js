@@ -4,7 +4,6 @@ const KEY = process.env.JWT_SECRET;
 // general API access
 
 export const getAllObjects = async (path) => {
-
   const response = await fetch(`${BASE_URL}/api/${path}`, {
     headers: {
       'x-api-key': KEY,
@@ -33,6 +32,11 @@ export const getUsers = async () => {
 
 export const getUser = async (userId) => {
   return getSingleObject(`users/${userId}`);
+};
+
+// get genshin player object
+export const getGenshinPlayer = async (userId) => {
+  return getSingleObject(`users/${userId}/yuanshen`);
 };
 
 export const addUser = async (formData) => {
@@ -84,6 +88,26 @@ export const deleteUser = async (userId) => {
     };
 
     const response = await fetch(`${BASE_URL}/api/users/${userId}`, Options);
+    const json = await response.json();
+    return json;
+  } catch (err) {
+    return err;
+  }
+};
+export const deleteGenshinPlayer = async (userId, objId) => {
+  try {
+    const Options = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': KEY,
+      },
+    };
+
+    const response = await fetch(
+      `${BASE_URL}/api/users/${userId}/yuanshen/${objId}`,
+      Options
+    );
     const json = await response.json();
     return json;
   } catch (err) {
