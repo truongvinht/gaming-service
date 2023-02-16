@@ -1,5 +1,4 @@
-
-const Head = ({description = 'Gaming Service'}) => {
+const Head = ({ description = 'Gaming Service' }) => {
   return (
     <head>
       <title>Gaming</title>

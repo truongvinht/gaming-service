@@ -1,4 +1,4 @@
-import mongoConnector from "./mongoConnector";
+import mongoConnector from './mongoConnector';
 
 export const findAllHandler = async (
   model,
@@ -12,9 +12,9 @@ export const findAllHandler = async (
   await mongoConnector();
 
   switch (method) {
-    case "GET":
+    case 'GET':
       try {
-        let objs = undefined;
+        let objs;
         if (populate == null) {
           objs = await model.find(arg);
         } else {
@@ -23,18 +23,16 @@ export const findAllHandler = async (
 
         res.status(200).json({ success: true, data: objs });
       } catch (error) {
-        console.log(error);
         res.status(400).json({ success: false });
       }
       break;
-    case "POST":
+    case 'POST':
       try {
         const obj = await model.create(
           req.body
         ); /* create a new model in the database */
         res.status(201).json({ success: true, data: obj });
       } catch (error) {
-        console.log(error);
         res.status(400).json({ success: false });
       }
       break;
@@ -53,7 +51,7 @@ export const findByIdHandler = async (model, req, res) => {
   await mongoConnector();
 
   switch (method) {
-    case "GET" /* Get a model by its ID */:
+    case 'GET' /* Get a model by its ID */:
       try {
         const obj = await model.findById(id);
         if (!obj) {
@@ -65,7 +63,7 @@ export const findByIdHandler = async (model, req, res) => {
       }
       break;
 
-    case "PUT" /* Edit a model by its ID */:
+    case 'PUT' /* Edit a model by its ID */:
       try {
         const obj = await model.findByIdAndUpdate(id, req.body, {
           new: true,
@@ -80,7 +78,7 @@ export const findByIdHandler = async (model, req, res) => {
       }
       break;
 
-    case "DELETE" /* Delete a model by its ID */:
+    case 'DELETE' /* Delete a model by its ID */:
       try {
         const deletedObject = await model.deleteOne({ _id: id });
         if (!deletedObject) {
@@ -98,7 +96,13 @@ export const findByIdHandler = async (model, req, res) => {
   }
 };
 
-export const findInValueHandler = async (model, req, res, attr, populate = null) => {
+export const findInValueHandler = async (
+  model,
+  req,
+  res,
+  attr,
+  populate = null
+) => {
   const {
     query: { id },
     method,
@@ -107,12 +111,12 @@ export const findInValueHandler = async (model, req, res, attr, populate = null)
   await mongoConnector();
 
   switch (method) {
-    case "GET":
+    case 'GET':
       try {
-        let map = {};
+        const map = {};
         map[attr] = { $in: [id] };
 
-        let obj = undefined;
+        let obj;
         if (populate == null) {
           obj = await model.find(map);
         } else {
