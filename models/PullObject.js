@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import ObjectDetail from './ObjectDetail';
 
 /* PullObjectSchema will correspond to a collection in your MongoDB database. */
 const PullObjectSchema = new mongoose.Schema({
@@ -39,6 +40,11 @@ const PullObjectSchema = new mongoose.Schema({
   image_url: {
     /* Url to pet image */
     type: String,
+  },
+  details: {
+    /* object detail */
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'ObjectDetail',
   },
 });
 

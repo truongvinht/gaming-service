@@ -1,17 +1,10 @@
 /* eslint-disable no-unused-vars */
 import mongoose from 'mongoose';
-import PullObject from './PullObject';
 import Talent from './Talent';
 import Location from './Location';
 
-/* CharacterDetailSchema will correspond to a collection in your MongoDB database. */
-const CharacterDetailSchema = new mongoose.Schema({
-  character: {
-    /* related character id */
-    type: mongoose.Schema.Types.ObjectId,
-    required: [true, 'Please provide a character.'],
-    ref: 'PullObject',
-  },
+/* ObjectDetailSchema will correspond to a collection in your MongoDB database. */
+const ObjectDetailSchema = new mongoose.Schema({
   location: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Location',
@@ -39,5 +32,5 @@ const CharacterDetailSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.models.CharacterDetail ||
-  mongoose.model('CharacterDetail', CharacterDetailSchema);
+export default mongoose.models.ObjectDetail ||
+  mongoose.model('ObjectDetail', ObjectDetailSchema);
