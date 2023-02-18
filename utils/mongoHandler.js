@@ -1,5 +1,48 @@
 import mongoConnector from './mongoConnector';
 
+export const findAllObjectsHandler = async (
+  model,
+  req,
+  res,
+  arg = {},
+  populate = null,
+  populateArgs = ''
+) => {
+  const { method } = req;
+
+  await mongoConnector();
+
+  switch (method) {
+    case 'GET':
+      try {
+        let objs;
+        if (populate == null) {
+          objs = await model.find(arg);
+        } else {
+          objs = await model.find(arg).populate(populate, populateArgs);
+        }
+
+        res.status(200).json(objs);
+      } catch (error) {
+        res.status(500).json();
+      }
+      break;
+    case 'POST':
+      try {
+        const obj = await model.create(
+          req.body
+        ); /* create a new model in the database */
+        res.status(201).json(obj);
+      } catch (error) {
+        res.status(500).json();
+      }
+      break;
+    default:
+      res.status(500).json();
+      break;
+  }
+};
+
 export const findAllHandler = async (
   model,
   req,
