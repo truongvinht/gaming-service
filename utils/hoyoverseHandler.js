@@ -26,10 +26,10 @@ export const fetchPath = async (method, url, path, parameter = undefined, body =
   );
 };
 
+// banner?banner=a37a19624270b092e7250edfabce541a3435c2
 export const fetchBanner = async (banner, lang, region = 'os_usa') => {
 
   // standard banner
-  //a37a19624270b092e7250edfabce541a3435c2
   const headers = {
     //required headers
     "x-rpc-app_version": "1.5.0",
@@ -38,6 +38,26 @@ export const fetchBanner = async (banner, lang, region = 'os_usa') => {
   
   return await fetch(
     `https://webstatic-sea.hoyoverse.com/hk4e/gacha_info/${region}/${banner}/${lang}.json`,
+    {
+      method: 'GET',
+      headers: headers,
+    }
+  );
+};
+
+// all banner ids
+export const fetchAllBanner = async (lang, region = 'os_usa') => {
+
+  // standard banner
+  const headers = {
+    //required headers
+    "x-rpc-app_version": "1.5.0",
+    "x-rpc-client_type": "4",
+    lang:lang
+  };
+  
+  return await fetch(
+    `https://webstatic-sea.hoyoverse.com/hk4e/gacha_info/getConfigList`,
     {
       method: 'GET',
       headers: headers,
@@ -82,16 +102,16 @@ export const redeemCode = async (account_id, cookie_token, uid, code) => {
   const dsKey = generateDs(isChinese(uid));
 
   const headers = {
-    //required headers
-    "x-rpc-app_version": "1.5.0",
-    "x-rpc-client_type": "4",
-    "x-rpc-language": 'en',
-    "Accept-Encoding": "gzip, deflate",
-    Accept: "*/*",
-    //authentications headers
+    // required headers
+    'x-rpc-app_version': '1.5.0',
+    'x-rpc-client_type': '4',
+    'x-rpc-language': 'en',
+    'Accept-Encoding': 'gzip, deflate',
+    Accept: '*/*',
+    // authentications headers
     ds: dsKey,
     // recommended headers
-    "user-agent": USER_AGENT,
+    'user-agent': USER_AGENT,
     Cookie: `account_id=${account_id}; cookie_token=${cookie_token}`,
   };
 
@@ -105,13 +125,14 @@ export const redeemCode = async (account_id, cookie_token, uid, code) => {
         lang:'en'
       }),
     {
-      method: "GET",
+      method: 'GET',
       headers: headers,
     }
   );
 };
 
 
+// daily checkin overview for the current month
 export const checkinInfo = async (account_id, cookie_token, uid) => {
 
   const dsKey = generateDs(isChinese(uid));
@@ -132,14 +153,14 @@ export const checkinInfo = async (account_id, cookie_token, uid) => {
         lang:'en-us'
       }),
     {
-      method: "GET",
+      method: 'GET',
       headers: headers,
     }
   );
 };
 
+// daily checkin
 export const checkin = async (account_id, cookie_token, uid) => {
-
   const dsKey = generateDs(isChinese(uid));
 
   const headers = {
@@ -159,6 +180,34 @@ export const checkin = async (account_id, cookie_token, uid) => {
       }),
     {
       method: "POST",
+      headers: headers,
+    }
+  );
+};
+
+
+// get overview of claimed rewards
+export const checkinAward = async (account_id, cookie_token, uid) => {
+  const dsKey = generateDs(isChinese(uid));
+
+  const headers = {
+    //required headers
+    "x-rpc-app_version": "1.5.0",
+    "x-rpc-client_type": "4",
+    //authentications headers
+    ds: dsKey,
+    Cookie: `account_id=${account_id}; cookie_token=${cookie_token}`,
+  };
+
+  // current_page should be iterated
+  return fetch(
+    `https://hk4e-api-os.hoyoverse.com/event/sol/award?` +
+      new URLSearchParams({
+        act_id: 'e202102251931481',
+        current_page:1
+      }),
+    {
+      method: "GET",
       headers: headers,
     }
   );
