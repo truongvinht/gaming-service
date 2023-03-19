@@ -1,9 +1,11 @@
+/* eslint-disable react/no-unstable-nested-components */
 'use client';
 
-import { BiUserPlus, BiEdit, BiTrashAlt } from 'react-icons/bi';
+import { BiUserPlus, BiEdit, BiTrashAlt, BiDetail } from 'react-icons/bi';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useQueryClient, useQuery } from 'react-query';
+import { useRouter } from 'next/navigation';
 import Form from '../../components/form/Form';
 import { deleteUser, getUsers } from '../../utils/apiHandler';
 import ContentTable from '../../components/ContentTable';
@@ -18,6 +20,16 @@ const UserHome = () => {
   const dispatch = useDispatch();
 
   const queryClient = useQueryClient();
+  const router = useRouter();
+
+  const onLaunch = async (id) => {
+    // launch user
+    try {
+      router.push('/users/' + id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const onUpdate = (id) => {
     dispatch(toggleChangeAction());
@@ -52,13 +64,23 @@ const UserHome = () => {
       cellRenderer: (params) => {
         return (
           <div className="px-5 py-1 justify-around gap-5">
+          <button
+            type="button"
+            className="cursor"
+            value={params.data._id}
+            onClick={(e) => onLaunch(e.currentTarget.value)}
+          >
+            <BiDetail color="black" size="25" />
+          </button>
             <button
+              type="button"
               className="cursor"
               onClick={(e) => onUpdate(e.currentTarget.value)}
             >
               <BiEdit color="green" size="25" />
             </button>
             <button
+              type="button"
               className="cursor"
               value={params.data._id}
               onClick={(e) => onDelete(e.currentTarget.value)}
