@@ -22,7 +22,7 @@ const GenshinHome = () => {
           </h2>
           <p>Details zu den verfügbaren Elementen</p>
         </a>
-        <a href="/genshin/artifacts" className={styles.card}>
+        <a href="/genshin/characters" className={styles.card}>
           <h2>
             Figuren <span>-&gt;</span>
           </h2>

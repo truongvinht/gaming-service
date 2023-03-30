@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
+
 'use client';
 
 import { BiUserPlus, BiEdit, BiTrashAlt, BiDetail } from 'react-icons/bi';
@@ -106,7 +107,7 @@ const UserHome = () => {
   };
 
   // prepare meta for form
-  let compList = [];
+  const compList = [];
 
   compList.push({
     required: true,

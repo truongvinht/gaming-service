@@ -1,4 +1,3 @@
-import { findAllHandler } from '../../../../../../utils/mongoHandler';
 import Model from '../../../../../../models/GenshinPlayer';
 
 import PullObject from '../../../../../../models/PullObject';
@@ -19,9 +18,9 @@ export default async function handler(req, res) {
     await mongoConnector();
     // first load every character
 
-    let figures = await PullObject.find({ type: 'Figur' });
+    const figures = await PullObject.find({ type: 'Figur' });
 
-    let data = [];
+    const data = [];
 
     const player = ObjectId(id);
     const user = await Model.findOne({ player });
