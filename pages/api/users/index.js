@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   // create a new user
   if (method === 'POST') {
     // copy body obj
-    let body = JSON.parse(JSON.stringify(req.body));
+    const body = JSON.parse(JSON.stringify(req.body));
 
     const user = await Model.findOne({ username: body.username });
     if (user) {
@@ -28,7 +28,6 @@ export default async function handler(req, res) {
       const obj = await Model.create(body);
       res.status(201).json({ success: true, data: obj });
     } catch (error) {
-      console.log(error);
       res.status(400).json({ success: false });
     }
   } else {

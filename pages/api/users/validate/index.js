@@ -9,6 +9,7 @@ export default async function handler(req, res) {
     const { body } = req;
 
     // validation req username and pwd
+    // eslint-disable-next-line no-prototype-builtins
     if (!body.hasOwnProperty('username') || !body.hasOwnProperty('password')) {
       res.status(400).json();
       return;
@@ -18,26 +19,22 @@ export default async function handler(req, res) {
 
     try {
       await mongoConnector();
-      const user = await Model.findOne({ username: username });
+      const user = await Model.findOne({ username });
       if (!user) {
         // user not found
         res.status(400).json();
+      } else if (!user.password) {
+        res.status(403).json();
       } else {
-        if (!user.password) {
-          res.status(403).json();
+        const isMatch = await bcrypt.compare(body.password, user.password);
+        if (!isMatch) {
+          // password incorrect
+          res.status(401).json();
         } else {
-          const password = body.password;
-          const isMatch = await bcrypt.compare(password, user.password);
-          if (!isMatch) {
-            // password incorrect
-            res.status(401).json();
-          } else {
-            res.status(200).json({ user });
-          }
+          res.status(200).json({ user });
         }
       }
     } catch (error) {
-      console.log(error);
       res.status(401).json(JSON.stringify(error));
     }
   } else {

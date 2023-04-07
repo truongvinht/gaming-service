@@ -12,7 +12,7 @@ export default NextAuth({
         username: { label: 'Username', type: 'text' },
         password: { label: 'Password', type: 'text' },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         const { username } = credentials;
         const { password } = credentials;
         const response = await fetch(`${URL}/api/users/validate`, {
@@ -25,10 +25,15 @@ export default NextAuth({
         });
 
         if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('User doesnt exist or bad password');
+          const { user } = await response.json();
+          // eslint-disable-next-line no-underscore-dangle
+          const id = user._id;
+          const name = user.username;
+          const { email } = user;
+          const token = user;
+          return { id, name, email, token };
         }
+        throw new Error('User doesnt exist or bad password');
       },
     }),
     // ...add more providers here
@@ -38,6 +43,23 @@ export default NextAuth({
   },
   pages: {
     signIn: '/auth/login',
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        // eslint-disable-next-line no-param-reassign
+        token.role = user.role;
+      }
+      return token;
+    },
+    session({ session, token }) {
+      if (token && session.user) {
+        // eslint-disable-next-line no-param-reassign
+        session.user.role = token.role;
+      }
+
+      return session;
+    },
   },
   theme: {
     colorScheme: 'auto', // "auto" | "dark" | "light"

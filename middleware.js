@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { getToken } from 'next-auth/jwt';
 
 const isUserRoute = (pathname) => {
   return pathname.startsWith('/users');
@@ -15,14 +16,20 @@ export async function middleware(request) {
 
   // You could also check for any property on the session object,
   if (isUserRoute(pathname)) {
-    // TODO: needs to be adjusted, placeholder redirect
-    return NextResponse.redirect(new URL('/auth/login', request.url));
+    const token = await getToken({
+      req: request,
+      secret: process.env.NEXTAUTH_SECRET,
+    });
+
+    if (!token) {
+      return NextResponse.redirect(new URL('/auth/login', request.url));
+    }
+    return NextResponse.next();
   }
 
   // protect api route with x-api-key
   if (isApiRoute(pathname)) {
     const key = req.headers.get('x-api-key');
-
     if (!(process.env.JWT_SECRET === key)) {
       return NextResponse.redirect(new URL('/api/auth/unauthorized', req.url));
     }
