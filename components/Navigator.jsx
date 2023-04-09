@@ -1,9 +1,12 @@
 'use client';
+
 import Link from 'next/link';
 import { useState } from 'react';
+import { signOut, useSession } from "next-auth/react";
 
 const Navigator = ({ appTitle, nodes = {} }) => {
   const [navbar, setNavbar] = useState(false);
+  const { data } = useSession();
   return (
     <nav className="w-full bg-gray-800 shadow">
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
@@ -64,6 +67,8 @@ const Navigator = ({ appTitle, nodes = {} }) => {
                   </li>
                 );
               })}
+              {!!data?.user ? (
+              <li onClick={() => signOut()}>Abmelden</li>):(<div />)}
             </ul>
           </div>
         </div>
