@@ -14,6 +14,26 @@ export default async function handler(req, res) {
   await mongoConnector();
 
   switch (method) {
+    case 'POST':
+      // add new id to list
+
+      const player = ObjectId(id);
+      const fid = ObjectId(yid);
+      const user = await Model.findOne({ player });
+
+      user.data.push(fid);
+
+      const body = { data: user.data}
+
+      const obj = await Model.findByIdAndUpdate(user._id, body, {
+        new: true,
+        runValidators: true,
+      });
+      if (!obj) {
+        return res.status(400).json();
+      }
+      res.status(200).json();
+      break;
     case 'DELETE':
       try {
         // only update entry instead of real deletion

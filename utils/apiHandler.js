@@ -114,3 +114,23 @@ export const deleteGenshinPlayer = async (userId, objId) => {
     return err;
   }
 };
+export const insertGenshinPlayerItem = async (userId, objId) => {
+  try {
+    const Options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': KEY,
+      },
+    };
+
+    const response = await fetch(
+      `${BASE_URL}/api/users/${userId}/yuanshen/${objId}`,
+      Options
+    );
+    const json = await response.json();
+    return json;
+  } catch (err) {
+    return err;
+  }
+};

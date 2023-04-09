@@ -4,14 +4,17 @@
 
 'use client';
 
-import { BiTrashAlt } from 'react-icons/bi';
+import { BiTrashAlt, BiUserPlus } from 'react-icons/bi';
 import { useState } from 'react';
 import { useQueryClient, useQuery } from 'react-query';
 import ContentTable from '../../../components/ContentTable';
 import {
+  insertGenshinPlayerItem,
   deleteGenshinPlayer,
   getGenshinPlayer,
 } from '../../../utils/apiHandler';
+
+import DropdownItem from '../../../components/form/DropdownItem';
 
 const UserDetailPage = ({ params }) => {
   const queryClient = useQueryClient();
@@ -22,8 +25,10 @@ const UserDetailPage = ({ params }) => {
   const onDelete = async (objId) => {
     try {
       await deleteGenshinPlayer(userId, objId);
-      await queryClient.prefetchQuery(['genshinplayer', userId],
-      () => getGenshinPlayer(userId));
+      await queryClient.prefetchQuery(
+        ['genshinplayer', userId],
+        getGenshinPlayer(userId)
+      );
     } catch (err) {
       console.log(err);
     }
@@ -35,7 +40,7 @@ const UserDetailPage = ({ params }) => {
     {
       headerName: 'Actions',
       field: 'actions',
-      cellRenderer: ( params ) => {
+      cellRenderer: (params) => {
         return (
           <div className="px-5 py-1 justify-around gap-5">
             <button
@@ -50,6 +55,29 @@ const UserDetailPage = ({ params }) => {
       },
     },
   ]);
+
+  const [selection, setSelection] = useState('');
+
+  const selectFigure = async(id) => {
+    setSelection(id);
+  };
+
+  const addFigure = async() => {
+
+    if (selection === '') {
+      return;
+    }
+
+    try {
+      await insertGenshinPlayerItem(userId, selection);
+      await queryClient.prefetchQuery(
+        ['genshinplayer', userId],
+        getGenshinPlayer(userId)
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   const { isLoading, isError, data, error } = useQuery(
     ['genshinplayer', userId],
@@ -68,6 +96,13 @@ const UserDetailPage = ({ params }) => {
     return 0;
   });
 
+  const missingData = data.other;
+  const comboBoxEntries = [];
+  for (const d of missingData) {
+    comboBoxEntries.push({ value: d._id, name: d.name });
+  }
+
+
   return (
     <div>
       <h1 className="text-xl md:text-5xl text-center font-bold py-10">
@@ -75,6 +110,21 @@ const UserDetailPage = ({ params }) => {
       </h1>
       {/** collapsable form */}
       <div className="container mx-auto">
+      <div className="flex justify-between py-5 border-b">
+      <DropdownItem name="Figurenauswahl" items={comboBoxEntries} onChange={(e) => selectFigure(e.currentTarget.value)} />
+      <div className="left flex gap-3">
+        <button
+          onClick={addFigure}
+          className="flex bg-indigo-500 text-white px-5 py-2 border rounded-md hover:bg-gray-50 hover:border-indigo-500 hover:text-gray-800"
+        >
+          Hinzufügen{' '}
+          <span className="px-1">
+            <BiUserPlus size={23} />
+          </span>
+        </button>
+      </div>
+      
+    </div>
         {/** table */}
         <ContentTable rows={rows} columnDefs={columnDefs} />
       </div>
