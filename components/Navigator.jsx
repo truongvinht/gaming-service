@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from 'next-auth/react';
 
 const Navigator = ({ appTitle, nodes = {} }) => {
   const [navbar, setNavbar] = useState(false);

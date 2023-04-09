@@ -8,32 +8,24 @@ export const CardCollectionGrid = ({ cards }) => {
   );
 };
 
-export const ObjectCardDetails = ({ card }) => {
-  if (card.type === 'Waffe') {
-    return (
-      <div key={'Card_Details_' + card._id} className={styles.main_content}>
-        <p className={styles.card_name}>{card.name}</p>
-        <p className={styles.element}>Typ: {card.wp_type}</p>
-      </div>
-    );
-  } else {
-    return (
-      <div key={'Card_Details_' + card._id} className={styles.main_content}>
-        <p className={styles.card_name}>{card.name}</p>
-        <p className={styles.element}>Element: {card.element}</p>
-        <p className={styles.element}>Typ: {card.wp_type}</p>
-      </div>
-    );
-  }
+export const ObjectCardDetails = ({ card, allowEditing, onClickHandler }) => {
+  return (
+    <div key={'Card_Details_' + card._id} className={styles.main_content}>
+      <p className={styles.card_name}>{card.name}</p>
+      {card.type === 'Figur'?(<p className={styles.element}>Element: {card.element}</p>):(<p />)}
+      <p className={styles.element}>Typ: {card.wp_type}</p>
+      {allowEditing? (<button value={card._id} onClick={(e) => onClickHandler(e.currentTarget.value)}>Bearbeiten</button>):<p />}
+    </div>
+  );
 };
 
-export const ObjectCard = ({ card }) => {
+export const ObjectCard = ({ card, allowEditing, onClickHandler }) => {
   return (
     <div key={card._id}>
       <div key={'card_' + card._id} className={getCardStyle(card)}>
         <img src={card.image_url} />
         <h6 className={styles.card_name}>{card.name}</h6>
-        <ObjectCardDetails card={card} />
+        <ObjectCardDetails card={card} allowEditing={ allowEditing } onClickHandler={ onClickHandler } />
       </div>
     </div>
   );
