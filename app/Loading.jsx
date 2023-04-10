@@ -5,8 +5,8 @@ const Loading = () => {
     <div>
       <h1 className="text-xl md:text-3xl text-center font-bold py-10">
         Wird geladen...
-        <Spinner />
       </h1>
+      <Spinner />
     </div>
   );
 };
