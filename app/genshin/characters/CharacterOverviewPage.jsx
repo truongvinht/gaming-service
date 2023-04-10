@@ -37,8 +37,7 @@ const CharacterOverviewPage = () => {
     return 0;
   });
 
-  const onClickHandler = async(id) => {
-    console.log(id);
+  const onClickHandler = async (id) => {
     router.push('/genshin/characters/' + id);
   };
   return (
@@ -47,13 +46,13 @@ const CharacterOverviewPage = () => {
         Figuren ({rows.length})
       </h1>
       <CardCollectionGrid
-        cards={
-          rows.map((obj) => 
-          (<ObjectCard card={obj}
-            allowEditing={!!sessionData?.user} 
-            onClickHandler={onClickHandler} />
-          )
-          )}
+        cards={rows.map((obj) =>
+          (<ObjectCard
+            card={obj}
+            allowEditing={!!sessionData?.user}
+            onClickHandler={onClickHandler}
+          />)
+        )}
       />
     </div>
   );

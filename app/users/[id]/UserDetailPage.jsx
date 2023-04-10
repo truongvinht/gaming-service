@@ -14,7 +14,7 @@ import {
   getGenshinPlayer,
 } from '../../../utils/apiHandler';
 
-import DropdownItem from '../../../components/form/DropdownItem';
+import DropdownItem from '../../../components/form/item/DropdownItem';
 
 const UserDetailPage = ({ params }) => {
   const queryClient = useQueryClient();
@@ -102,6 +102,10 @@ const UserDetailPage = ({ params }) => {
     comboBoxEntries.push({ value: d._id, name: d.name });
   }
 
+  const attributeDescription = {
+    name: 'Figurenauswahl',
+    items: comboBoxEntries
+  };
 
   return (
     <div>
@@ -111,7 +115,7 @@ const UserDetailPage = ({ params }) => {
       {/** collapsable form */}
       <div className="container mx-auto">
       <div className="flex justify-between py-5 border-b">
-      <DropdownItem name="Figurenauswahl" items={comboBoxEntries} onChange={(e) => selectFigure(e.currentTarget.value)} />
+      <DropdownItem attributeDescription={attributeDescription} onChange={(e) => selectFigure(e.currentTarget.value)} />
       <div className="left flex gap-3">
         <button
           onClick={addFigure}

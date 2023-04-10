@@ -3,7 +3,7 @@
 import { useRef } from 'react';
 import { signIn } from 'next-auth/react';
 import Textbox from '../../../components/Textbox';
-import GreenButton from '../../../components/buttons/GreenButton';
+import { GreenButton } from '../../../components/CustomButton';
 
 const LoginPage = () => {
   const userName = useRef('');

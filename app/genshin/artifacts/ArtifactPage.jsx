@@ -6,6 +6,7 @@ import {
   ArtifactCard,
   CardCollectionGrid,
 } from '../../../components/CardCollectionGrid';
+import Loading from '../../Loading';
 
 const ArtifactPage = () => {
   const PATH = 'yuanshen/artifacts';
@@ -15,7 +16,7 @@ const ArtifactPage = () => {
     () => getAllObjects(PATH)
   );
 
-  if (isLoading) return <div>Wird Geladen...</div>;
+  if (isLoading) return <Loading />;
 
   if (isError) return <div>Fehler: {error}</div>;
 

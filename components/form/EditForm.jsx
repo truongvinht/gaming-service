@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { getUser } from '../../utils/apiHandler';
-import FormItem from './FormItem';
-import GreenButton from '../buttons/GreenButton';
+import FormItem from './ItemHelper';
+import { GreenButton } from '../CustomButton';
 
 /**
  * Component for form
@@ -33,14 +33,18 @@ const EditForm = ({
     return <div>Fehler beim Laden...</div>;
   }
 
-  if (components == undefined) {
+  if (components === undefined) {
     return <div>Input missing!</div>;
   }
 
   return (
     <form className={formClass} id={formId} onSubmit={handleSubmit}>
       {components.map((obj) => (
-        <FormItem key={obj.name} attribute_desc={obj} onChange={setFormData} />
+        <FormItem
+          key={obj.name}
+          attributeDescription={obj}
+          onChange={setFormData}
+        />
       ))}
       <GreenButton label="Speichern" type="submit" customStyle="w-2/6" />
       {handleDelete !== null ? (
