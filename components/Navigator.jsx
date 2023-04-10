@@ -62,13 +62,18 @@ const Navigator = ({ appTitle, nodes = {} }) => {
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
               {nodes.map((node) => {
                 return (
-                  <li className="text-white">
+                  <li key={node.title} className="text-white">
                     <Link href={node.link}>{node.title}</Link>
                   </li>
                 );
               })}
-              {!!data?.user ? (
-              <li onClick={() => signOut()}>Abmelden</li>):(<div />)}
+              {data?.user ? (
+                <li key="Abmelden" onClick={() => signOut()}>
+                  Abmelden
+                </li>
+              ) : (
+                <div />
+              )}
             </ul>
           </div>
         </div>

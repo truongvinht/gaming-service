@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useQueryClient, useQuery } from 'react-query';
 import { useRouter } from 'next/navigation';
+import Loading from '../Loading';
 import Form from '../../components/form/Form';
 import { deleteUser, getUsers } from '../../utils/apiHandler';
 import ContentTable from '../../components/ContentTable';
@@ -65,14 +66,14 @@ const UserHome = () => {
       cellRenderer: (params) => {
         return (
           <div className="px-5 py-1 justify-around gap-5">
-          <button
-            type="button"
-            className="cursor"
-            value={params.data._id}
-            onClick={(e) => onLaunch(e.currentTarget.value)}
-          >
-            <BiDetail color="black" size="25" />
-          </button>
+            <button
+              type="button"
+              className="cursor"
+              value={params.data._id}
+              onClick={(e) => onLaunch(e.currentTarget.value)}
+            >
+              <BiDetail color="black" size="25" />
+            </button>
             <button
               type="button"
               className="cursor"
@@ -96,7 +97,7 @@ const UserHome = () => {
 
   const { isLoading, isError, data, error } = useQuery('users', getUsers);
 
-  if (isLoading) return <div>Wird Geladen...</div>;
+  if (isLoading) return <Loading />;
 
   if (isError) return <div>Fehler: {error}</div>;
 

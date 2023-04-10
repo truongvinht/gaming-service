@@ -2,11 +2,13 @@
 
 import { useQuery } from 'react-query';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { getAllObjects } from '../../../utils/apiHandler';
 import {
   CardCollectionGrid,
   ObjectCard,
 } from '../../../components/CardCollectionGrid';
+import Loading from '../../Loading';
 
 const CharacterOverviewPage = () => {
   const PATH = 'yuanshen/characters';
@@ -15,8 +17,9 @@ const CharacterOverviewPage = () => {
     () => getAllObjects(PATH)
   );
   const sessionData = useSession().data;
+  const router = useRouter();
 
-  if (isLoading) return <div>Wird Geladen...</div>;
+  if (isLoading) return <Loading />;
 
   if (isError) return <div>Fehler: {error}</div>;
 
@@ -36,8 +39,8 @@ const CharacterOverviewPage = () => {
 
   const onClickHandler = async(id) => {
     console.log(id);
+    router.push('/genshin/characters/' + id);
   };
-
   return (
     <div>
       <h1 className="text-xl md:text-5xl text-center font-bold py-10">

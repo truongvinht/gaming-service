@@ -1,6 +1,6 @@
 // import client component
-import CharacterOverviewPage from './CharacterOverviewPage'
+import CharacterOverviewPage from './CharacterOverviewPage';
 
-const Page = async () => (<CharacterOverviewPage />);
+const Page = async () => <CharacterOverviewPage />;
 
 export default Page;

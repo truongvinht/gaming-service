@@ -13,7 +13,7 @@ const CharacterNewPage = () => {
     value: "name",
   });
   compList.push({
-    required: true,
+    required: false,
     name: "Image Url",
     type: "text",
     maxLength: "100",

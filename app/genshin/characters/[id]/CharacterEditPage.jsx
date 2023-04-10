@@ -2,7 +2,9 @@
 
 import Form from '../../../../components/form/Form';
 
-const CharacterEditPage = () => {
+const CharacterEditPage = ({ params }) => {
+  const { id } = params;
+
   // prepare meta for form
   const compList = [];
 
@@ -20,6 +22,7 @@ const CharacterEditPage = () => {
     maxLength: '100',
     value: 'image_url',
   });
+
   return (
     <div>
       <h1 className="text-xl md:text-5xl text-center font-bold py-10">
