@@ -28,7 +28,7 @@ const UserHome = () => {
   const onLaunch = async (id) => {
     // launch user
     try {
-      router.push('/users/' + id);
+      router.push(`/users/${id}`);
     } catch (err) {
       console.log(err);
     }
